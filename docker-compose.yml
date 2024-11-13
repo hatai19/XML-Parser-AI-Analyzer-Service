@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: db
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data_db:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - full_network
+
+
+  project:
+    container_name: project
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+#    restart: unless-stopped
+    networks:
+      - full_network
+
+
+  second:
+    container_name: second
+    build:
+      context: ./second
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+#    depends_on:
+#      - db
+##    restart: unless-stopped
+    networks:
+      - full_network
+
+volumes:
+  postgres_data_db: {}
+networks:
+  full_network:
