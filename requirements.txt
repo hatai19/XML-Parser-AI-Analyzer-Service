@@ -9,3 +9,5 @@ alembic
 psycopg2-binary
 httpx
 apscheduler
+pytest
+pytest-asyncio

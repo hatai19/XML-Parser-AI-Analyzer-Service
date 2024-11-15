@@ -18,5 +18,11 @@ class Product(Base):
     name: Mapped[str] = mapped_column()
     quantity: Mapped[int] = mapped_column()
     price: Mapped[float] = mapped_column()
+    category: Mapped[str] = mapped_column()
     sale_id: Mapped[int] = mapped_column(ForeignKey('sale.id'), default=None, nullable=True)
     sale: Mapped["Sale"] = relationship(back_populates="products")
+
+class Analysis(Base):
+    __tablename__ = 'analysis'
+    date : Mapped[str] = mapped_column()
+    answer : Mapped[str] = mapped_column()
