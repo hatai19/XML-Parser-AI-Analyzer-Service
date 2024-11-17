@@ -19,9 +19,9 @@
 Сначала клонируйте репозиторий на ваш локальный компьютер:
 ```bash
 git clone https://github.com/yourusername/XML-Parser-AI-Analyzer-Service.git
-cd XML-Parser-AI-Analyzer-Service
+cd XML-Parser-AI-Analyzer-Service```
 
-### Шаг 2: Запуск контейнеров
+## Шаг 2: Запуск контейнеров
 Запустите Docker-контейнеры с помощью Docker Compose:
 
 docker-compose up -d
