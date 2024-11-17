@@ -16,6 +16,20 @@ services:
     networks:
       - full_network
 
+  db_test:
+    container_name: db_test
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5433:5432
+    volumes:
+      - postgres_data_db_test:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - full_network
 
   project:
     container_name: project
@@ -26,25 +40,23 @@ services:
       - "8000:8000"
     depends_on:
       - db
-#    restart: unless-stopped
+      - db_test
     networks:
       - full_network
 
 
-  second:
-    container_name: second
+  test_service:
+    container_name: test_service
     build:
-      context: ./second
+      context: ./test_service
       dockerfile: Dockerfile
     ports:
       - "8001:8001"
-#    depends_on:
-#      - db
-##    restart: unless-stopped
     networks:
       - full_network
 
 volumes:
   postgres_data_db: {}
+  postgres_data_db_test: {}
 networks:
   full_network:

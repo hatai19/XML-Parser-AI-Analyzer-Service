@@ -11,3 +11,4 @@ httpx
 apscheduler
 pytest
 pytest-asyncio
+pytz
